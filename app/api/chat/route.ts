@@ -8,7 +8,7 @@ import { formToRaw, normalizePrefs } from "@/lib/agent/prefs";
 import { WARNING_MARK } from "@/lib/marks";
 import { mergePrefill } from "@/lib/agent/prefill";
 
-export const maxDuration = 60;
+export const maxDuration = 90;
 
 const PRETTY: Record<string, string> = { google: "Gemini", groq: "Groq", openrouter: "OpenRouter", cerebras: "Cerebras", mistral: "Mistral", zai: "Z.ai" };
 
@@ -23,9 +23,9 @@ function withoutReasoning(msgs: any[]): any[] {
 }
 const MAX_MESSAGES = 60;
 const MAX_STEPS = 8;
-// The function is cut off at maxDuration (60s) and the user would see a silent empty run. The models get this long
+// The function is cut off at maxDuration (90s) and the user would see a silent empty run. The models get this long
 // (measured from the start of the request); after that the built-in planner answers while there is still time.
-const DEADLINE_MS = Number(process.env.RUN_DEADLINE_MS) || 40_000;
+const DEADLINE_MS = Number(process.env.RUN_DEADLINE_MS) || 65_000;
 const MIN_ATTEMPT_MS = Number(process.env.MIN_ATTEMPT_MS) || 8_000;
 
 const SYSTEM = `You are "WhereTo", a practical planner that builds a realistic Saturday plan. Use tools; never invent places.
